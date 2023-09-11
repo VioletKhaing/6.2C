@@ -1,13 +1,13 @@
 pipeline {
     agent any
     
-    stage ('Checkout'){
-        steps{
+
+    stages {
+         stage ('Checkout'){
+         steps{
             checkout scm
         }
-    }
-    stages {
-        stage('Build') {
+    }        stage('Build') {
             steps {
                 tool name: 'Maven 3.9.4', type: 'Maven'
             }
