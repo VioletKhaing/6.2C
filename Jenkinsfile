@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools {
-        maven 'Maven 3.9.4'
-    }
+    
     stage ('Checkout'){
         steps{
             checkout scm
@@ -10,6 +8,10 @@ pipeline {
     }
     stages {
         stage('Build') {
+            steps {
+                tool name: 'Maven 3.9.4', type: 'Maven'
+            }
+            
             steps {
                 
                 // Build the code using a build automation tool (e.g., Maven) 
