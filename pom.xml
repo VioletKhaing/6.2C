@@ -1,3 +1,1 @@
-git add pom.xml  # Add the pom.xml file to the staging area
-git commit -m "Add/Update pom.xml"  # Commit the changes with a meaningful message
-git push origin main  # Push the changes to the main branch (or your relevant branch)
+
