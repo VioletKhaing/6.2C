@@ -7,7 +7,8 @@ pipeline {
          steps{
             checkout scm
         }
-    }        stage('Build') {
+    }    
+        stage('Build') {
             steps {
                 tool name: 'Maven 3.9.4', type: 'Maven'
             }
