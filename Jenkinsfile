@@ -1,5 +1,10 @@
 pipeline {
     agent any
+
+    tools{
+        maven 'Maven 3.9.4'
+    }
+    
     stages {
          stage ('Checkout'){
          steps{
@@ -8,7 +13,6 @@ pipeline {
     }    
         stage('Build') {
             steps {
-                tool name: 'Maven 3.9.4', type: 'Maven'
                 // Build the code using a build automation tool (e.g., Maven) 
                 sh 'mvn clean package'
                 
