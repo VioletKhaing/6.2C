@@ -36,7 +36,7 @@ pipeline {
 
             steps {
 
-                echo "Using JUnit for Unit and Integration Testing "
+                echo "Using JUnit for Unit and Integration Testing."
 
             }
 
