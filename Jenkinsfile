@@ -1,43 +1,69 @@
-pipeline{
-    agent any 
-    environment {
-       DIRECTORY_PATH = '/path/to/Desktop/SIT753/Jenkinsfile'
-       TESTING_ENVIRONMENT = "TestingEnv"
-       PRODUCTION_ENVIRONMENT = "Violet"
+pipeline {
+    agent any
+    tools {
+        maven 'Maven 3.9.4'
     }
-    stages{
-        stage('Build'){
-            steps{
-                echo "fetching the source code from DIRECTORY_PATH"
-                echo "compiling the code and generating any necessary artifacts"
+    stages {
+        stage('Build') {
+            steps {
+              echo "Using Maven to build the project"
+                
             }
         }
-        stage('Test'){
-            steps{
-                echo "Running uni tests"
-                echo "Running integration tests"
+
+        stage('Unit and Integration Tests') {
+            steps {
+                echo "Using Maven for Unit and Integration Tests"
             }
         }
-        stage('Code Quality Check'){
-            steps{
-                echo "Checking the quality of the code"
-            }
-        }
-        stage('Deploy'){
-            steps{
-                echo "Deploying the application to TestingEnv"
-            }
-        }
-        stage('Approval'){
-            steps{
-                echo "Waiting for manual approval..."
-                sleep(time: 10, unit: 'SECONDS')
+
+        stage('Code Analysis') {
+            steps {
+                echo "Using SonarQube for Code Analysis"
                 }
-        }
-        stage('Deploy to Production'){
-            steps{
-                echo "Deploying the code to Violet"
             }
         }
-     }
-}
+
+        stage('Security Scan') {
+            steps {
+                echo "Using Owasp Zap for security scan"
+            }
+        }
+
+        stage('Deploy to Staging') {
+            steps {
+                echo "Deploying the application to a staging server"
+            }
+        }
+
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Running integration tests on the staging environment"
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying the application to a production server"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline succeeded! Sending notifications...'
+            emailext(
+                subject: 'Jenkins Pipeline - Success',
+                body: 'Your Jenkins pipeline has succeeded. No further details are provided.',
+                to: 'violetstyles1999@gmail.com'
+            )
+        }
+        failure {
+            echo 'Pipeline failed! Sending notifications...'
+            emailext(
+                subject: 'Jenkins Pipeline - Failure',
+                body: 'Your Jenkins pipeline has failed. Please review the build logs for details.',
+                to: 'violetstyles1999@gmail.com'
+            )
+        }
+    }
