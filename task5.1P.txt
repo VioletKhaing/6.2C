@@ -1,0 +1,43 @@
+pipeline{
+    agent any 
+    environment {
+       DIRECTORY_PATH = '/path/to/Desktop/SIT753/Jenkinsfile'
+       TESTING_ENVIRONMENT = "TestingEnv"
+       PRODUCTION_ENVIRONMENT = "Violet"
+    }
+    stages{
+        stage('Build'){
+            steps{
+                echo "fetching the source code from DIRECTORY_PATH"
+                echo "compiling the code and generating any necessary artifacts"
+            }
+        }
+        stage('Test'){
+            steps{
+                echo "Running uni tests"
+                echo "Running integration tests"
+            }
+        }
+        stage('Code Quality Check'){
+            steps{
+                echo "Checking the quality of the code"
+            }
+        }
+        stage('Deploy'){
+            steps{
+                echo "Deploying the application to TestingEnv"
+            }
+        }
+        stage('Approval'){
+            steps{
+                echo "Waiting for manual approval..."
+                sleep(time: 10, unit: 'SECONDS')
+                }
+        }
+        stage('Deploy to Production'){
+            steps{
+                echo "Deploying the code to Violet"
+            }
+        }
+     }
+}
