@@ -1,5 +1,3 @@
-[5:08 pm] SARFARAZ SYED
-
 pipeline {
 
     agent any
